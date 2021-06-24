@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moninnet_app/ui/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'login-screen';
@@ -7,6 +8,20 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final _theme = Theme.of(context);
+    return Container(
+      color: _theme.backgroundColor,
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              LoginCard(),
+              InfoRow(),
+            ],
+          ),
+          LoginScreenLogo(),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'config/config.dart';
-import 'ui/screens/login_screen.dart';
 
 void main() {
   runApp(MobinnetApp(
@@ -17,7 +16,7 @@ class MobinnetApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: MobinnetTheme().theme(),
-      home: LoginScreen(),
+      onGenerateRoute: appRoute!.onGenareteScreens,
     );
   }
 }
