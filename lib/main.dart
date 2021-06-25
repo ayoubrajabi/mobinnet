@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'config/config.dart';
 
 void main() {
-  runApp(MobinnetApp(
-    appRoute: AppRoute(),
-  ));
+  runApp(
+    MobinnetApp(
+      appRoute: AppRoute(),
+    ),
+  );
 }
 
 class MobinnetApp extends StatelessWidget {
