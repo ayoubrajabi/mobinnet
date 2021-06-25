@@ -24,15 +24,3 @@ class LoginCard extends StatelessWidget {
     );
   }
 }
-
-class UserLogin extends StatelessWidget {
-  const UserLogin({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
-    final _width = MediaQuery.of(context).size.width;
-    final _hieght = MediaQuery.of(context).size.height;
-    return Container();
-  }
-}

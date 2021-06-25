@@ -9,9 +9,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
-    return Container(
-      color: _theme.backgroundColor,
-      child: Stack(
+    return Scaffold(
+      backgroundColor: _theme.backgroundColor,
+      body: Stack(
         children: [
           Column(
             children: [
