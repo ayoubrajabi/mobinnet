@@ -13,6 +13,12 @@ class MobinnetTheme {
         color: const Color(0xFF00AD4C),
       ),
       cardColor: const Color(0xFFF5F7FA),
+      textTheme: TextTheme(
+        headline1: TextStyle(
+          fontSize: 12.0,
+          color: Color(0xFFA0A8C2),
+        ),
+      ),
       tabBarTheme: TabBarTheme(
         indicatorSize: TabBarIndicatorSize.label,
         labelStyle: const TextStyle(
