@@ -27,7 +27,7 @@ class _LoginImageCoverState extends State<LoginImageCover> {
       children: [
         Positioned(
           child: Container(
-            width: _width * 0.65,
+            margin: const EdgeInsets.fromLTRB(60.0, 40.0, 0.0, 20.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -50,58 +50,55 @@ class _LoginImageCoverState extends State<LoginImageCover> {
         ),
         Align(
           alignment: Alignment.center,
-          child: SizedBox(
-            width: _width * 0.65,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List<MouseRegion>.generate(
-                  2,
-                  (index) => MouseRegion(
-                    onEnter: (enter) => setState(() {
-                      onEnter = true;
-                      buttonIndex = index;
-                    }),
-                    onExit: (exit) => setState(() => onEnter = false),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                          ),
-                        ],
-                        shape: BoxShape.circle,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 70.0, right: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List<MouseRegion>.generate(
+                2,
+                (index) => MouseRegion(
+                  onEnter: (enter) => setState(() {
+                    onEnter = true;
+                    buttonIndex = index;
+                  }),
+                  onExit: (exit) => setState(() => onEnter = false),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10.0,
+                        ),
+                      ],
+                      shape: BoxShape.circle,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _pageController?.animateToPage(index,
+                            duration: const Duration(milliseconds: 250),
+                            curve: Curves.linear);
+                        setState(() {
+                          currentPageIndex = index;
+                        });
+                      },
+                      child: Icon(
+                        index == 0
+                            ? Icons.chevron_left_rounded
+                            : Icons.chevron_right_rounded,
+                        color: Colors.blueGrey.shade800,
+                        size: 24.0,
                       ),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _pageController?.animateToPage(index,
-                              duration: const Duration(milliseconds: 250),
-                              curve: Curves.linear);
-                          setState(() {
-                            currentPageIndex = index;
-                          });
-                        },
-                        child: Icon(
-                          index == 0
-                              ? Icons.chevron_left_rounded
-                              : Icons.chevron_right_rounded,
-                          color: Colors.blueGrey.shade800,
-                          size: 24.0,
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(12.0),
                         ),
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.all(12.0),
-                          ),
-                          elevation: MaterialStateProperty.all(
-                            buttonIndex != index || onEnter == false ? 0 : 10,
-                          ),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(CircleBorder()),
+                        elevation: MaterialStateProperty.all(
+                          buttonIndex != index || onEnter == false ? 0 : 10,
                         ),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        shape: MaterialStateProperty.all(CircleBorder()),
                       ),
                     ),
                   ),
