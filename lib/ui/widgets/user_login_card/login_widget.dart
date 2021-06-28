@@ -12,18 +12,18 @@ class _LoginWidgetState extends State<LoginWidget> {
     CupertinoIcons.lock_circle: 'گذرواژه',
   };
 
-  final List<String> _infoButtons = ['راهنمای ورود', 'فیلم آموزش ورود'];
+  final List<String> _buttonInfo = ['راهنمای ورود', 'فیلم آموزش ورود'];
 
-  bool? onEnter = false;
+  bool? _onEnter = false;
 
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(50, 20, 20, 20),
+      padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
       child: Column(
         children: [
-          Container(
+          Ink(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(5.0),
@@ -81,21 +81,35 @@ class _LoginWidgetState extends State<LoginWidget> {
           const SizedBox(
             height: 20.0,
           ),
-          SizedBox(
+          Ink(
             width: double.infinity,
             height: 50.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              boxShadow: _onEnter!
+                  ? [
+                      BoxShadow(
+                        color: Color(0xFFB2DAA9),
+                        blurRadius: 10.0,
+                        offset: Offset(0, 5),
+                      ),
+                    ]
+                  : [],
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF71BF43),
+                  Color(0xFF02AD4C),
+                ],
+              ),
+            ),
             child: MouseRegion(
-              onEnter: (enter) => setState(() => onEnter = true),
-              onExit: (exite) => setState(() => onEnter = false),
-              child: ElevatedButton(
+              onEnter: (enter) => setState(() => _onEnter = true),
+              onExit: (exite) => setState(() => _onEnter = false),
+              child: MaterialButton(
                 onPressed: () {},
-                child: Text('ورود'),
-                style: ButtonStyle(
-                  elevation:
-                      MaterialStateProperty.all(onEnter == false ? 0.0 : 2.0),
-                  backgroundColor: MaterialStateProperty.all(
-                    _theme.splashColor,
-                  ),
+                child: Text(
+                  'ورود',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -110,7 +124,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               (index) => TextButton(
                 onPressed: () {},
                 child: Text(
-                  _infoButtons[index],
+                  _buttonInfo[index],
                   style: _theme.textTheme.headline1
                       ?.copyWith(color: _theme.tabBarTheme.labelColor),
                 ),

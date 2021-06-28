@@ -36,7 +36,7 @@ class _UserLoginState extends State<UserLogin>
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 160.0, 20.0, 60.0),
+            padding: const EdgeInsets.fromLTRB(20.0, 160.0, 20.0, 0.0),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: Scaffold(
@@ -89,8 +89,7 @@ class _UserLoginState extends State<UserLogin>
                       endIndent: 50.0,
                       indent: 30.0,
                     ),
-                    SizedBox(
-                      height: 300.0,
+                    Expanded(
                       child: TabBarView(
                         controller: _tabController,
                         children: [
