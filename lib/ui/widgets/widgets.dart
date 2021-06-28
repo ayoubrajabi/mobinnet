@@ -10,3 +10,6 @@ export 'user_login_card/sms_button_ink.dart';
 export 'user_login_card/custom_text_field.dart';
 export 'user_login_card/login_text_fields.dart';
 export 'user_login_card/login_button_widget.dart';
+export 'image_cover/image_pageview_widget.dart';
+export 'image_cover/page_arrow_widget.dart';
+export 'image_cover/page_dot_indicator.dart';

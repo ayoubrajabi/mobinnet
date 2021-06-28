@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:persian_tools/persian_tools.dart';
 
 import '../widgets.dart';
@@ -24,7 +23,21 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    void _onChanged(String value, int index) {
+      if (value.isPhoneNumber && index == 0) {
+        setState(() => _isPhoneNum = true);
+      } else if (value.isEmpty && index == 0) {
+        setState(() => _toolTipMessage = 'الزامی');
+      } else if (index == 0) {
+        setState(() {
+          _isPhoneNum = false;
+          _toolTipMessage = 'شماره موبایل صحیح نیست';
+        });
+      }
+    }
+
     final _theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
       child: Column(
@@ -44,24 +57,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               children: List<LoginTextFields>.generate(
                 2,
                 (index) => LoginTextFields(
-                  onChanged: index == 0
-                      ? (string) {
-                          if (string.isPhoneNumber) {
-                            setState(() {
-                              _isPhoneNum = true;
-                            });
-                          } else if (string.isEmpty) {
-                            setState(() {
-                              _toolTipMessage = 'الزامی';
-                            });
-                          } else {
-                            setState(() {
-                              _isPhoneNum = false;
-                              _toolTipMessage = 'شماره موبایل صحیح نیست';
-                            });
-                          }
-                        }
-                      : (string) {},
+                  onChanged: (value) => _onChanged(value, index),
                   index: index,
                   isPhoneNum: _isPhoneNum,
                   toolTipMessage: _toolTipMessage,
@@ -84,7 +80,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List<TextButton>.generate(
-              2,
+              _buttonInfo.length,
               (index) => TextButton(
                 onPressed: () {},
                 child: Text(

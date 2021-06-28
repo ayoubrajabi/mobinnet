@@ -16,8 +16,6 @@ class LoginCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         textDirection: TextDirection.rtl,
         children: [
-          // LoginImageCover(),
-          // UserLogin(),
           SizedBox(
             width: 500,
             child: UserLogin(),
