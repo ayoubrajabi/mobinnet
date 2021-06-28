@@ -116,6 +116,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.1"
+  persian_tools:
+    dependency: "direct main"
+    description:
+      name: persian_tools
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   petitparser:
     dependency: transitive
     description:

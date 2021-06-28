@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:persian_tools/persian_tools.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -15,6 +17,8 @@ class _LoginWidgetState extends State<LoginWidget> {
   final List<String> _buttonInfo = ['راهنمای ورود', 'فیلم آموزش ورود'];
 
   bool? _onEnter = false;
+  bool? _isPhoneNum = false;
+  String? _toolTipMessage = 'الزامی';
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +39,49 @@ class _LoginWidgetState extends State<LoginWidget> {
               ],
             ),
             child: Column(
-              children: List<TextField>.generate(
+              children: List<TextFormField>.generate(
                 2,
-                (index) => TextField(
+                (index) => TextFormField(
                   style: _theme.textTheme.headline1!.copyWith(
                     color: _theme.tabBarTheme.labelColor,
                   ),
                   obscureText: index == 0 ? false : true,
+                  onChanged: index == 0
+                      ? (string) {
+                          if (string.isPhoneNumber) {
+                            setState(() {
+                              _isPhoneNum = true;
+                            });
+                          } else if (string.isEmpty) {
+                            setState(() {
+                              _toolTipMessage = 'الزامی';
+                            });
+                          } else {
+                            setState(() {
+                              _isPhoneNum = false;
+                              _toolTipMessage = 'شماره موبایل صحیح نیست';
+                            });
+                          }
+                        }
+                      : (string) {},
+                  inputFormatters: index == 0
+                      ? [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                          LengthLimitingTextInputFormatter(11),
+                        ]
+                      : [],
+                  keyboardType:
+                      index == 0 ? TextInputType.numberWithOptions() : null,
                   decoration: InputDecoration(
+                    suffix: Tooltip(
+                      message: _toolTipMessage!,
+                      child: index == 0
+                          ? Icon(
+                              _isPhoneNum! ? null : Icons.info,
+                              color: _isPhoneNum! ? null : Colors.amber,
+                            )
+                          : null,
+                    ),
                     hintText: _textFieldValues.values.elementAt(index),
                     hintStyle: _theme.textTheme.headline1,
                     prefixIcon: Icon(
@@ -55,11 +94,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                       borderSide:
                           const BorderSide(color: Colors.white, width: 0.0),
                       borderRadius: index == 0
-                          ? BorderRadius.only(
+                          ? const BorderRadius.only(
                               topLeft: Radius.circular(5.0),
                               topRight: Radius.circular(5.0),
                             )
-                          : BorderRadius.only(
+                          : const BorderRadius.only(
                               bottomLeft: Radius.circular(5.0),
                               bottomRight: Radius.circular(5.0),
                             ),
@@ -68,11 +107,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                       borderSide:
                           const BorderSide(color: Colors.white, width: 0.0),
                       borderRadius: index == 0
-                          ? BorderRadius.only(
+                          ? const BorderRadius.only(
                               topLeft: Radius.circular(5.0),
                               topRight: Radius.circular(5.0),
                             )
-                          : BorderRadius.only(
+                          : const BorderRadius.only(
                               bottomLeft: Radius.circular(5.0),
                               bottomRight: Radius.circular(5.0),
                             ),
@@ -91,16 +130,16 @@ class _LoginWidgetState extends State<LoginWidget> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               boxShadow: _onEnter!
-                  ? [
+                  ? const [
                       BoxShadow(
                         color: Color(0xFFB2DAA9),
                         blurRadius: 10.0,
                         offset: Offset(0, 5),
                       ),
                     ]
-                  : [],
+                  : const [],
               gradient: LinearGradient(
-                colors: [
+                colors: const [
                   Color(0xFF71BF43),
                   Color(0xFF02AD4C),
                 ],
@@ -111,7 +150,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               onExit: (exite) => setState(() => _onEnter = false),
               child: MaterialButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'ورود',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -129,8 +168,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                 onPressed: () {},
                 child: Text(
                   _buttonInfo[index],
-                  style: _theme.textTheme.headline1
-                      ?.copyWith(color: _theme.tabBarTheme.labelColor),
+                  style: _theme.textTheme.headline1!
+                      .copyWith(color: _theme.tabBarTheme.labelColor),
                 ),
               ),
             ),

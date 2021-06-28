@@ -24,7 +24,7 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       onChanged: onChange,
       controller: textController![index!],
-      style: _theme.textTheme.headline1?.copyWith(
+      style: _theme.textTheme.headline1!.copyWith(
         color: _theme.tabBarTheme.labelColor,
       ),
       decoration: InputDecoration(
@@ -61,7 +61,7 @@ class CustomTextField extends StatelessWidget {
                       splashColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       icon: Icon(
-                        CupertinoIcons.refresh,
+                        CupertinoIcons.refresh_circled,
                         color: _theme.tabBarTheme.labelColor,
                         size: 18.0,
                       ),
