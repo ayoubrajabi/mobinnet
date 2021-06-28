@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persian_tools/persian_tools.dart';
 
+import '../widgets.dart';
+
 class LoginWidget extends StatefulWidget {
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
@@ -39,13 +41,9 @@ class _LoginWidgetState extends State<LoginWidget> {
               ],
             ),
             child: Column(
-              children: List<TextFormField>.generate(
+              children: List<LoginTextFields>.generate(
                 2,
-                (index) => TextFormField(
-                  style: _theme.textTheme.headline1!.copyWith(
-                    color: _theme.tabBarTheme.labelColor,
-                  ),
-                  obscureText: index == 0 ? false : true,
+                (index) => LoginTextFields(
                   onChanged: index == 0
                       ? (string) {
                           if (string.isPhoneNumber) {
@@ -64,59 +62,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                           }
                         }
                       : (string) {},
-                  inputFormatters: index == 0
-                      ? [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                          LengthLimitingTextInputFormatter(11),
-                        ]
-                      : [],
-                  keyboardType:
-                      index == 0 ? TextInputType.numberWithOptions() : null,
-                  decoration: InputDecoration(
-                    suffix: Tooltip(
-                      message: _toolTipMessage!,
-                      child: index == 0
-                          ? Icon(
-                              _isPhoneNum! ? null : Icons.info,
-                              color: _isPhoneNum! ? null : Colors.amber,
-                            )
-                          : null,
-                    ),
-                    hintText: _textFieldValues.values.elementAt(index),
-                    hintStyle: _theme.textTheme.headline1,
-                    prefixIcon: Icon(
-                      _textFieldValues.keys.elementAt(index),
-                      color: _theme.iconTheme.color,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.white, width: 0.0),
-                      borderRadius: index == 0
-                          ? const BorderRadius.only(
-                              topLeft: Radius.circular(5.0),
-                              topRight: Radius.circular(5.0),
-                            )
-                          : const BorderRadius.only(
-                              bottomLeft: Radius.circular(5.0),
-                              bottomRight: Radius.circular(5.0),
-                            ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.white, width: 0.0),
-                      borderRadius: index == 0
-                          ? const BorderRadius.only(
-                              topLeft: Radius.circular(5.0),
-                              topRight: Radius.circular(5.0),
-                            )
-                          : const BorderRadius.only(
-                              bottomLeft: Radius.circular(5.0),
-                              bottomRight: Radius.circular(5.0),
-                            ),
-                    ),
-                  ),
+                  index: index,
+                  isPhoneNum: _isPhoneNum,
+                  toolTipMessage: _toolTipMessage,
+                  textFieldValues: _textFieldValues,
                 ),
               ),
             ),
@@ -124,38 +73,10 @@ class _LoginWidgetState extends State<LoginWidget> {
           const SizedBox(
             height: 20.0,
           ),
-          Ink(
-            width: double.infinity,
-            height: 50.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              boxShadow: _onEnter!
-                  ? const [
-                      BoxShadow(
-                        color: Color(0xFFB2DAA9),
-                        blurRadius: 10.0,
-                        offset: Offset(0, 5),
-                      ),
-                    ]
-                  : const [],
-              gradient: LinearGradient(
-                colors: const [
-                  Color(0xFF71BF43),
-                  Color(0xFF02AD4C),
-                ],
-              ),
-            ),
-            child: MouseRegion(
-              onEnter: (enter) => setState(() => _onEnter = true),
-              onExit: (exite) => setState(() => _onEnter = false),
-              child: MaterialButton(
-                onPressed: () {},
-                child: const Text(
-                  'ورود',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+          LoginButton(
+            onEnter: (enter) => setState(() => _onEnter = true),
+            onExit: (exite) => setState(() => _onEnter = false),
+            onEnterValue: _onEnter,
           ),
           const SizedBox(
             height: 5.0,
