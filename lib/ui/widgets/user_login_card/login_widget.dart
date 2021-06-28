@@ -38,6 +38,10 @@ class _LoginWidgetState extends State<LoginWidget> {
               children: List<TextField>.generate(
                 2,
                 (index) => TextField(
+                  style: _theme.textTheme.headline1!.copyWith(
+                    color: _theme.tabBarTheme.labelColor,
+                  ),
+                  obscureText: index == 0 ? false : true,
                   decoration: InputDecoration(
                     hintText: _textFieldValues.values.elementAt(index),
                     hintStyle: _theme.textTheme.headline1,
