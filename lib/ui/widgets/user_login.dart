@@ -24,19 +24,28 @@ class _UserLoginState extends State<UserLogin>
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
+    final _height = MediaQuery.of(context).size.height;
+    final bool _isMobile = Responsive.isMobile(context);
+
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(0.0, 40.0, 60.0, 20.0),
+          margin: _isMobile
+              ? const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 10.0)
+              : const EdgeInsets.fromLTRB(0.0, 40.0, 60.0, 20.0),
           decoration: BoxDecoration(
             color: _theme.cardColor,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15.0),
-              bottomRight: Radius.circular(15.0),
-            ),
+            borderRadius: _isMobile
+                ? BorderRadius.circular(15.0)
+                : BorderRadius.only(
+                    topRight: Radius.circular(15.0),
+                    bottomRight: Radius.circular(15.0),
+                  ),
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 160.0, 20.0, 0.0),
+            padding: _isMobile
+                ? EdgeInsets.fromLTRB(0.0, _height * 0.2, 0.0, 10.0)
+                : EdgeInsets.fromLTRB(20.0, _height * 0.2, 20.0, 0.0),
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: Scaffold(
@@ -45,7 +54,7 @@ class _UserLoginState extends State<UserLogin>
                   title: Text(
                     'خوش آمدید',
                     style: TextStyle(
-                      fontSize: 24.0,
+                      fontSize: _isMobile ? 20.0 : 24.0,
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF045453),
                     ),
@@ -55,7 +64,7 @@ class _UserLoginState extends State<UserLogin>
                   bottom: PreferredSize(
                     preferredSize: Size(double.infinity, 40.0),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 160.0),
+                      padding: EdgeInsets.only(left: _isMobile ? 65.0 : 160.0),
                       child: TabBar(
                         indicatorWeight: 3.0,
                         controller: _tabController,

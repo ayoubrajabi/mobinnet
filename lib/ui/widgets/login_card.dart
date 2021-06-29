@@ -10,19 +10,23 @@ class LoginCard extends StatelessWidget {
 
     return Container(
       width: _width,
-      height: _hieght * 0.9,
+      height: Responsive.isMobile(context) ? _hieght : _hieght * 0.9,
       color: _theme.backgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         textDirection: TextDirection.rtl,
         children: [
           SizedBox(
-            width: 500,
+            width: Responsive.isMobile(context) ? _width * 0.9 : 500,
             child: UserLogin(),
           ),
-          Expanded(
-            child: LoginImageCover(),
-          ),
+          Responsive.isDesktop(context) || Responsive.isTablet(context)
+              ? Expanded(
+                  child: LoginImageCover(),
+                )
+              : const SizedBox(
+                  width: 15.0,
+                ),
         ],
       ),
     );

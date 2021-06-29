@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         children: [
           LoginCard(),
-          InfoRow(),
+          Responsive.isDesktop(context) ? InfoRow() : const SizedBox(),
         ],
       ),
     );

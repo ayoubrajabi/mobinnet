@@ -55,7 +55,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             ),
             child: Column(
               children: List<LoginTextFields>.generate(
-                2,
+                _textFieldValues.length,
                 (index) => LoginTextFields(
                   onChanged: (value) => _onChanged(value, index),
                   index: index,

@@ -13,3 +13,4 @@ export 'user_login_card/login_button_widget.dart';
 export 'image_cover/image_pageview_widget.dart';
 export 'image_cover/page_arrow_widget.dart';
 export 'image_cover/page_dot_indicator.dart';
+export 'responsive.dart';
