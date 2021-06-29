@@ -9,10 +9,12 @@ class LoginScreen extends StatelessWidget {
     final _theme = Theme.of(context);
     return Scaffold(
       backgroundColor: _theme.backgroundColor,
-      body: Column(
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         children: [
           LoginCard(),
-          Responsive.isDesktop(context) ? InfoRow() : const SizedBox(),
+          InfoRow(),
         ],
       ),
     );

@@ -7,20 +7,23 @@ class LoginCard extends StatelessWidget {
     final _theme = Theme.of(context);
     final _width = MediaQuery.of(context).size.width;
     final _hieght = MediaQuery.of(context).size.height;
+    final _isDesktop = Responsive.isDesktop(context);
+    final _isTablet = Responsive.isTablet(context);
+    final _isMobile = Responsive.isMobile(context);
 
     return Container(
       width: _width,
-      height: Responsive.isMobile(context) ? _hieght : _hieght * 0.9,
+      height: _isMobile ? _hieght : _hieght * 0.9,
       color: _theme.backgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         textDirection: TextDirection.rtl,
         children: [
           SizedBox(
-            width: Responsive.isMobile(context) ? _width * 0.9 : 500,
+            width: _isMobile ? _width * 0.9 : 500,
             child: UserLogin(),
           ),
-          Responsive.isDesktop(context) || Responsive.isTablet(context)
+          _isDesktop || _isTablet
               ? Expanded(
                   child: LoginImageCover(),
                 )

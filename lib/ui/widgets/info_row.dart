@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets.dart';
+
 class InfoRow extends StatelessWidget {
   final _infoRowItems = <IconData, List<String>>{
     Icons.ac_unit: ['مبین نت', 'صفحه اصلی مبین نت'],
@@ -12,18 +14,39 @@ class InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
+    final _height = MediaQuery.of(context).size.height;
+    final _isTablet = Responsive.isTablet(context);
+    final _isMobile = Responsive.isMobile(context);
+
     return SizedBox(
       width: _width,
-      height: 50.0,
+      height: _isTablet
+          ? _height * 0.2
+          : _isMobile
+              ? _height * 0.3
+              : _height * 0.065,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 60.0),
-        child: Row(
-          textDirection: TextDirection.rtl,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        padding: const EdgeInsets.only(left: 20.0, right: 30.0),
+        child: GridView(
+          reverse: true,
+          scrollDirection: Axis.horizontal,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: _isTablet
+                ? 280.0
+                : _isMobile
+                    ? 150.0
+                    : 320.0,
+            crossAxisCount: _isTablet
+                ? 2
+                : _isMobile
+                    ? 3
+                    : 1,
+            childAspectRatio: 0.18,
+          ),
           children: List<Container>.generate(
             _infoRowItems.keys.length,
             (infoRowItemsIndex) => Container(
-              height: 50.0,
+              height: _isMobile ? 35.0 : 50.0,
               child: Row(
                 textDirection: TextDirection.rtl,
                 children: [
@@ -39,6 +62,7 @@ class InfoRow extends StatelessWidget {
                     child: Center(
                       child: Icon(
                         _infoRowItems.keys.elementAt(infoRowItemsIndex),
+                        size: _isMobile ? 13.0 : 24.0,
                       ),
                     ),
                   ),
@@ -49,14 +73,22 @@ class InfoRow extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List<FittedBox>.generate(
-                      2,
+                      _infoRowItems.values.elementAt(0).length,
                       (index) => FittedBox(
                         child: Text(
                           _infoRowItems.values
                               .elementAt(infoRowItemsIndex)[index],
                           style: TextStyle(
-                            color: index == 0 ? Color(0xFF045453) : Colors.grey,
-                            fontSize: index == 0 ? 13.0 : 10.0,
+                            color: index == 0
+                                ? const Color(0xFF045453)
+                                : Colors.grey,
+                            fontSize: index == 0
+                                ? _isMobile
+                                    ? 11.0
+                                    : 13.0
+                                : _isMobile
+                                    ? 8.0
+                                    : 10.0,
                           ),
                         ),
                       ),
