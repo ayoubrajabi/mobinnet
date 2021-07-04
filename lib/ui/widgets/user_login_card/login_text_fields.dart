@@ -28,7 +28,7 @@ class LoginTextFields extends StatelessWidget {
               FilteringTextInputFormatter.allow(RegExp('[0-9]')),
               LengthLimitingTextInputFormatter(11),
             ]
-          : [],
+          : const [],
       keyboardType: index == 0 ? TextInputType.numberWithOptions() : null,
       decoration: InputDecoration(
         suffix: Tooltip(
@@ -47,7 +47,7 @@ class LoginTextFields extends StatelessWidget {
           color: _theme.iconTheme.color,
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: const Color(0xFFFFFFFF),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white, width: 0.0),
           borderRadius: index == 0

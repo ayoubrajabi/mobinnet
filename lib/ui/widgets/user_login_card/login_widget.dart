@@ -22,21 +22,21 @@ class _LoginWidgetState extends State<LoginWidget> {
   String? _toolTipMessage = 'الزامی';
   bool? _checkBoxValue = false;
 
+  void _onChangedTextField(String value, int index) {
+    if (value.isPhoneNumber && index == 0) {
+      setState(() => _isPhoneNum = true);
+    } else if (value.isEmpty && index == 0) {
+      setState(() => _toolTipMessage = 'الزامی');
+    } else if (index == 0) {
+      setState(() {
+        _isPhoneNum = false;
+        _toolTipMessage = 'شماره موبایل صحیح نیست';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _onChanged(String value, int index) {
-      if (value.isPhoneNumber && index == 0) {
-        setState(() => _isPhoneNum = true);
-      } else if (value.isEmpty && index == 0) {
-        setState(() => _toolTipMessage = 'الزامی');
-      } else if (index == 0) {
-        setState(() {
-          _isPhoneNum = false;
-          _toolTipMessage = 'شماره موبایل صحیح نیست';
-        });
-      }
-    }
-
     final _theme = Theme.of(context);
 
     return Padding(
@@ -58,7 +58,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               children: List<LoginTextFields>.generate(
                 _textFieldValues.length,
                 (index) => LoginTextFields(
-                  onChanged: (value) => _onChanged(value, index),
+                  onChanged: (value) => _onChangedTextField(value, index),
                   index: index,
                   isPhoneNum: _isPhoneNum,
                   toolTipMessage: _toolTipMessage,

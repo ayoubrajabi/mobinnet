@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persian_tools/persian_tools.dart';
 
 import '../widgets.dart';
 
@@ -14,6 +15,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   List<TextEditingController>? _textController;
   bool? _isActive = false;
   bool? _onEnter = false;
+  bool? _isPhoneNum = false;
+  String? _toolTipMessage = 'الزامی';
 
   final _textFieldValues = <IconData, String>{
     CupertinoIcons.phone: 'شماره موبایل',
@@ -23,19 +26,48 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   @override
   void initState() {
     _textController = List.generate(
-        _textFieldValues.length, (index) => TextEditingController());
+      _textFieldValues.length,
+      (index) => TextEditingController(),
+    );
     super.initState();
   }
 
+  void _activeLoginButton(int code) {
+    if (_textController!.first.text.isNotEmpty &&
+        _textController!.last.text == code.toString()) {
+      setState(() {
+        _isActive = true;
+      });
+    }
+    if (_textController!.last.text == '') {
+      setState(() {
+        _isActive = false;
+      });
+    }
+  }
+
+  void _validatePhoneNumber(String value, int index) {
+    if (value.isPhoneNumber && index == 0) {
+      setState(() => _isPhoneNum = true);
+    } else if (value.isEmpty && index == 0) {
+      setState(() => _toolTipMessage = 'الزامی');
+    } else if (index == 0) {
+      setState(() {
+        _isPhoneNum = false;
+        _toolTipMessage = 'شماره موبایل صحیح نیست';
+      });
+    }
+  }
+
+  int? _code = 1000 + Random().nextInt(9999 - 1000);
+
   @override
   Widget build(BuildContext context) {
-    int _code = 1000 + Random().nextInt(9999 - 1000);
-
     return Padding(
-      padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 20.0),
+      padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
       child: Column(
         children: [
-          Container(
+          Ink(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(5.0),
@@ -51,24 +83,19 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 _textFieldValues.length,
                 (index) => CustomTextField(
                   onChange: (string) {
-                    if (_textController![0].text.isNotEmpty &&
-                        _textController![1].text == _code.toString()) {
-                      setState(() {
-                        _isActive = true;
-                      });
-                    }
-                    if (_textController![1].text == '') {
-                      setState(() {
-                        _isActive = false;
-                      });
-                    }
+                    _activeLoginButton(_code!);
+                    _validatePhoneNumber(string, index);
                   },
+                  isPhoneNum: _isPhoneNum,
+                  toolTipMessage: _toolTipMessage,
                   textController: _textController,
                   textFieldValues: _textFieldValues,
                   index: index,
-                  code: _code,
+                  code: _code!,
                   isActive: _isActive,
-                  onPressed: () => setState(() {}),
+                  onPressed: () => setState(() {
+                    _code = 1000 + Random().nextInt(9999 - 1000);
+                  }),
                 ),
               ),
             ),

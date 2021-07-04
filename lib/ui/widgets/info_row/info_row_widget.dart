@@ -23,7 +23,7 @@ class InfoRowWidget extends StatelessWidget {
           ? _mediaQuery.size.height * 0.2
           : _isMobile!
               ? _mediaQuery.size.height * 0.52
-              : _mediaQuery.size.height * 0.065,
+              : _mediaQuery.size.height * 0.08,
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 60.0),
         child: GridView(
@@ -34,7 +34,7 @@ class InfoRowWidget extends StatelessWidget {
                 ? 250.0
                 : _isMobile!
                     ? 200.0
-                    : 300.0,
+                    : 250.0,
             crossAxisCount: _isTablet
                 ? 2
                 : _isMobile!
@@ -42,9 +42,9 @@ class InfoRowWidget extends StatelessWidget {
                     : 1,
             childAspectRatio: 0.18,
           ),
-          children: List<Container>.generate(
+          children: List<SizedBox>.generate(
             _infoRowItems.keys.length,
-            (infoRowItemsIndex) => Container(
+            (infoRowItemsIndex) => SizedBox(
               height: 50.0,
               child: Row(
                 textDirection: TextDirection.rtl,
