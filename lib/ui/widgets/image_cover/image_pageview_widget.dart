@@ -7,7 +7,8 @@ class ImagePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _width = MediaQuery.of(context).size.width;
+    final double? _width = MediaQuery.of(context).size.width;
+
     return Positioned(
       child: Container(
         margin: const EdgeInsets.fromLTRB(60.0, 40.0, 0.0, 20.0),
@@ -26,7 +27,7 @@ class ImagePageView extends StatelessWidget {
           itemBuilder: (context, index) {
             return Image.asset(
               'assets/images/cover.jpg',
-              width: _width * 0.5,
+              width: _width! * 0.5,
             );
           },
         ),

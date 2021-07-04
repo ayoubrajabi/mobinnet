@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: [
           LoginCard(),
-          InfoRow(),
+          InfoRowWidget(),
         ],
       ),
     );

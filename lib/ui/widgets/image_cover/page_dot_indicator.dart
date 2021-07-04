@@ -6,10 +6,11 @@ class PageDotIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _width = MediaQuery.of(context).size.width;
-    final _theme = Theme.of(context);
+    final double? _width = MediaQuery.of(context).size.width;
+    final ThemeData? _theme = Theme.of(context);
+
     return Positioned(
-      left: _width * 0.3,
+      left: _width! * 0.3,
       bottom: 100.0,
       child: SizedBox(
         width: 50,
@@ -22,8 +23,8 @@ class PageDotIndicator extends StatelessWidget {
               height: 10.0,
               decoration: BoxDecoration(
                 color: currentPageIndex! == index
-                    ? _theme.splashColor
-                    : _theme.splashColor.withAlpha(50),
+                    ? _theme!.splashColor
+                    : _theme!.splashColor.withAlpha(50),
                 shape: BoxShape.circle,
               ),
             ),

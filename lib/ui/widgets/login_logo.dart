@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:moninnet_app/constant/constants.dart';
 
 import 'widgets.dart';
 
 class LoginScreenLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final bool? _isMobile = Responsive.isMobile(context);
+
     return Positioned(
       top: 5.0,
-      right: Responsive.isMobile(context) ? 2.0 : 20.0,
+      right: _isMobile! ? 0.0 : 10.0,
       child: Stack(
         children: [
           SvgPicture.asset(
-            'assets/svg/circle.svg',
-            width: Responsive.isMobile(context) ? 180.0 : 220.0,
-            height: Responsive.isMobile(context) ? 180.0 : 220.0,
+            SvgAssets.circle!,
+            width: 250.0,
+            height: 250.0,
           ),
           Positioned(
-            top: Responsive.isMobile(context) ? 80.0 : 95.0,
-            right: Responsive.isMobile(context) ? 80.0 : 100.0,
+            top: 110.0,
+            right: 105.0,
             child: SvgPicture.asset(
-              'assets/svg/logo.svg',
-              width: Responsive.isMobile(context) ? 100.0 : 130.0,
+              SvgAssets.logo!,
+              width: 160.0,
             ),
           ),
         ],

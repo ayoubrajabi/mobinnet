@@ -20,6 +20,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   bool? _onEnter = false;
   bool? _isPhoneNum = false;
   String? _toolTipMessage = 'الزامی';
+  bool? _checkBoxValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,24 @@ class _LoginWidgetState extends State<LoginWidget> {
             ),
           ),
           const SizedBox(
-            height: 20.0,
+            height: 10.0,
+          ),
+          Row(
+            children: [
+              Checkbox(
+                value: _checkBoxValue,
+                onChanged: (val) => setState(() => _checkBoxValue = val),
+              ),
+              Text(
+                'مرا به خاطر بسپار',
+                style: _theme.textTheme.headline1!.copyWith(
+                  color: _theme.tabBarTheme.labelColor,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10.0,
           ),
           LoginButton(
             onEnter: (enter) => setState(() => _onEnter = true),
@@ -85,8 +103,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                 onPressed: () {},
                 child: Text(
                   _buttonInfo[index],
-                  style: _theme.textTheme.headline1!
-                      .copyWith(color: _theme.tabBarTheme.labelColor),
+                  style: _theme.textTheme.headline1!.copyWith(
+                    color: _theme.tabBarTheme.labelColor,
+                  ),
                 ),
               ),
             ),

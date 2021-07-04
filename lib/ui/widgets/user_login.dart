@@ -24,13 +24,13 @@ class _UserLoginState extends State<UserLogin>
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
-    final _height = MediaQuery.of(context).size.height;
-    final bool _isMobile = Responsive.isMobile(context);
+    final MediaQueryData? _mediaQuery = MediaQuery.of(context);
+    final bool? _isMobile = Responsive.isMobile(context);
 
     return Stack(
       children: [
         Container(
-          margin: _isMobile
+          margin: _isMobile!
               ? const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 10.0)
               : const EdgeInsets.fromLTRB(0.0, 40.0, 60.0, 20.0),
           decoration: BoxDecoration(
@@ -42,73 +42,84 @@ class _UserLoginState extends State<UserLogin>
                     bottomRight: Radius.circular(15.0),
                   ),
           ),
-          child: Padding(
-            padding: _isMobile
-                ? EdgeInsets.fromLTRB(0.0, _height * 0.15, 0.0, 10.0)
-                : EdgeInsets.fromLTRB(20.0, _height * 0.2, 20.0, 0.0),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Scaffold(
-                backgroundColor: _theme.cardColor,
-                appBar: AppBar(
-                  title: Text(
-                    'خوش آمدید',
-                    style: TextStyle(
-                      fontSize: _isMobile ? 20.0 : 24.0,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF045453),
-                    ),
-                  ),
-                  elevation: 0.0,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: _mediaQuery!.size.height * 0.2),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: Scaffold(
                   backgroundColor: _theme.cardColor,
-                  bottom: PreferredSize(
-                    preferredSize: Size(double.infinity, 40.0),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: _isMobile ? 65.0 : 160.0),
-                      child: TabBar(
-                        indicatorWeight: 3.0,
-                        controller: _tabController,
-                        indicator: _theme.tabBarTheme.indicator,
-                        indicatorColor: _theme.tabBarTheme.labelColor,
-                        indicatorSize: _theme.tabBarTheme.indicatorSize,
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        labelPadding: EdgeInsets.only(
-                          bottom: 10.0,
-                          left: 5.0,
-                          right: 5.0,
+                  appBar: AppBar(
+                    title: Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: Text(
+                        'خوش آمدید',
+                        style: TextStyle(
+                          fontSize: _isMobile ? 20.0 : 24.0,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF045453),
                         ),
-                        physics: const NeverScrollableScrollPhysics(),
-                        isScrollable: true,
-                        tabs: _tabsName
-                            .map(
-                              (tabsName) => Text(tabsName),
-                            )
-                            .toList(),
                       ),
+                    ),
+                    elevation: 0.0,
+                    backgroundColor: _theme.cardColor,
+                    bottom: PreferredSize(
+                      preferredSize: Size(_mediaQuery.size.width, 40.0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 30.0),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: TabBar(
+                            indicatorWeight: 3.0,
+                            controller: _tabController,
+                            indicator: _theme.tabBarTheme.indicator,
+                            indicatorColor: _theme.tabBarTheme.labelColor,
+                            indicatorSize: _theme.tabBarTheme.indicatorSize,
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            labelPadding: EdgeInsets.only(
+                              bottom: 3.0,
+                              left: 5.0,
+                              right: 5.0,
+                            ),
+                            physics: const NeverScrollableScrollPhysics(),
+                            isScrollable: true,
+                            tabs: _tabsName
+                                .map(
+                                  (tabsName) => Text(
+                                    tabsName,
+                                    style: _theme.textTheme.headline1!.copyWith(
+                                      color: _theme.tabBarTheme.labelColor,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    flexibleSpace: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 35.0),
+                      decoration: BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(
+                          color: Colors.black12,
+                          width: 0.5,
+                        ),
+                      )),
                     ),
                   ),
-                ),
-                body: Column(
-                  children: [
-                    Divider(
-                      color: Colors.grey.shade400,
-                      height: 0.5,
-                      thickness: 0.5,
-                      endIndent: 50.0,
-                      indent: 30.0,
+                  body: SizedBox(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        LoginWidget(),
+                        SignUpWidget(),
+                        SignUpWidget(),
+                      ],
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          LoginWidget(),
-                          SignUpWidget(),
-                          SignUpWidget(),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

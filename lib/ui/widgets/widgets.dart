@@ -1,6 +1,5 @@
 export 'login_card.dart';
 export 'login_logo.dart';
-export 'info_row.dart';
 export 'image_cover.dart';
 export 'user_login.dart';
 export 'user_login_card/login_widget.dart';
@@ -14,3 +13,4 @@ export 'image_cover/image_pageview_widget.dart';
 export 'image_cover/page_arrow_widget.dart';
 export 'image_cover/page_dot_indicator.dart';
 export 'responsive.dart';
+export 'info_row/info_row.dart';

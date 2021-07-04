@@ -12,6 +12,21 @@ class MobinnetTheme {
       iconTheme: IconThemeData(
         color: const Color(0xFF00AD4C),
       ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.all(const Color(0xFF00AD4C)),
+        side: BorderSide(
+          color: Colors.black12,
+          width: 0.7,
+        ),
+        splashRadius: 10.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+          side: BorderSide(
+            color: Colors.black12,
+            width: 0.1,
+          ),
+        ),
+      ),
       cardColor: const Color(0xFFF5F7FA),
       textTheme: TextTheme(
         headline1: TextStyle(
