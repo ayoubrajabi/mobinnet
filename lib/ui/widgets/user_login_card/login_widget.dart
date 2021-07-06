@@ -39,7 +39,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
       child: Column(
         children: [
-          Ink(
+          Container(
             decoration: BoxDecoration(
               color: const Color(0xFFFFFFFF),
               borderRadius: BorderRadius.circular(5.0),
