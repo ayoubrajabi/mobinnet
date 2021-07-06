@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ImagePageView extends StatelessWidget {
-  ImagePageView({required this.pageController, required this.onPageChanged});
+  ImagePageView({
+    required this.pageController,
+    required this.onPageChanged,
+  });
+
   final PageController? pageController;
   final void Function(int)? onPageChanged;
 

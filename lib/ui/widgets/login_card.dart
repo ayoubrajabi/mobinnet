@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'widgets.dart';
+import './widgets.dart';
 
 class LoginCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData? _theme = Theme.of(context);
     final MediaQueryData? _mediaQuery = MediaQuery.of(context);
-    final bool? _isDesktop = Responsive.isDesktop(context);
-    final bool? _isTablet = Responsive.isTablet(context);
-    final bool? _isMobile = Responsive.isMobile(context);
+    final bool? _isDesktop = Responsive.isDesktop(context),
+        _isTablet = Responsive.isTablet(context),
+        _isMobile = Responsive.isMobile(context);
 
     return Container(
       width: _mediaQuery!.size.width,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'widgets.dart';
+import './widgets.dart';
 
 class UserLogin extends StatefulWidget {
-  const UserLogin({Key? key}) : super(key: key);
-
   @override
   _UserLoginState createState() => _UserLoginState();
 }
@@ -23,8 +21,8 @@ class _UserLoginState extends State<UserLogin>
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
-    final MediaQueryData? _mediaQuery = MediaQuery.of(context);
+    final ThemeData _theme = Theme.of(context);
+    final MediaQueryData _mediaQuery = MediaQuery.of(context);
     final bool? _isMobile = Responsive.isMobile(context);
 
     return Stack(
@@ -44,8 +42,8 @@ class _UserLoginState extends State<UserLogin>
           ),
           child: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: _mediaQuery!.size.height * 0.2),
+              padding:
+                  EdgeInsets.symmetric(vertical: _mediaQuery.size.height * 0.2),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: Scaffold(

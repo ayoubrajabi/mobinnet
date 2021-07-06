@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
-  LoginButton(
-      {required this.onEnter,
-      required this.onExit,
-      required this.onEnterValue});
-  final void Function(PointerEvent)? onEnter;
-  final void Function(PointerEvent)? onExit;
+  LoginButton({
+    required this.onEnter,
+    required this.onExit,
+    required this.onEnterValue,
+  });
+
+  final void Function(PointerEvent)? onEnter, onExit;
   final bool? onEnterValue;
+
   @override
   Widget build(BuildContext context) {
     return Ink(
@@ -32,8 +34,8 @@ class LoginButton extends StatelessWidget {
         ),
       ),
       child: MouseRegion(
-        onEnter: onEnter,
-        onExit: onExit,
+        onEnter: onEnter!,
+        onExit: onExit!,
         child: MaterialButton(
           onPressed: () {},
           child: const Text(

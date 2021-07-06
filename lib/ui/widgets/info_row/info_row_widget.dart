@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets.dart';
 
 class InfoRowWidget extends StatelessWidget {
@@ -14,8 +13,8 @@ class InfoRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData? _mediaQuery = MediaQuery.of(context);
-    final bool? _isTablet = Responsive.isTablet(context);
-    final bool? _isMobile = Responsive.isMobile(context);
+    final bool? _isTablet = Responsive.isTablet(context),
+        _isMobile = Responsive.isMobile(context);
 
     return SizedBox(
       width: _mediaQuery!.size.width,

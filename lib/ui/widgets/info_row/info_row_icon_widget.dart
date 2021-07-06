@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InfoRowIcon extends StatelessWidget {
-  const InfoRowIcon({@required this.iconData});
+  const InfoRowIcon({required this.iconData});
   final IconData? iconData;
 
   @override

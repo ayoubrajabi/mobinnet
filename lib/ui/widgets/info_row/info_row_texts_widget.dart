@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class InfoRowTexts extends StatelessWidget {
   const InfoRowTexts({
-    @required this.length,
-    @required this.text,
+    required this.length,
+    required this.text,
   });
   final int? length;
   final List<String>? text;

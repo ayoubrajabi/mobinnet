@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_tools/persian_tools.dart';
-
 import '../widgets.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -17,10 +16,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   final List<String> _buttonInfo = ['راهنمای ورود', 'فیلم آموزش ورود'];
 
-  bool? _onEnter = false;
-  bool? _isPhoneNum = false;
+  bool? _onEnter = false, _isPhoneNum = false, _checkBoxValue = false;
   String? _toolTipMessage = 'الزامی';
-  bool? _checkBoxValue = false;
 
   void _onChangedTextField(String value, int index) {
     if (value.isPhoneNumber && index == 0) {
@@ -38,18 +35,17 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
       child: Column(
         children: [
           Ink(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFFFFFFFF),
               borderRadius: BorderRadius.circular(5.0),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
-                  color: Colors.grey.shade300,
+                  color: Color(0xFFE0E0E0),
                   blurRadius: 6.0,
                 ),
               ],
@@ -73,7 +69,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           Row(
             children: [
               Checkbox(
-                value: _checkBoxValue,
+                value: _checkBoxValue!,
                 onChanged: (val) => setState(() => _checkBoxValue = val),
               ),
               Text(
@@ -90,7 +86,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           LoginButton(
             onEnter: (enter) => setState(() => _onEnter = true),
             onExit: (exite) => setState(() => _onEnter = false),
-            onEnterValue: _onEnter,
+            onEnterValue: _onEnter!,
           ),
           const SizedBox(
             height: 5.0,

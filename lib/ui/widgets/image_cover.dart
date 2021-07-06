@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widgets.dart';
+import './widgets.dart';
 
 class LoginImageCover extends StatefulWidget {
   @override
@@ -10,8 +10,7 @@ class LoginImageCover extends StatefulWidget {
 class _LoginImageCoverState extends State<LoginImageCover> {
   PageController? _pageController;
   bool? onEnter = false;
-  int? buttonIndex = 0;
-  int? currentPageIndex = 0;
+  int? buttonIndex = 0, currentPageIndex = 0;
 
   @override
   void initState() {

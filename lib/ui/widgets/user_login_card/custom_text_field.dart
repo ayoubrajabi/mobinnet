@@ -4,25 +4,35 @@ import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({
-    this.onChange,
-    this.onPressed,
-    this.textController,
-    this.textFieldValues,
-    this.isActive,
-    this.code,
-    this.index,
-    this.isPhoneNum,
-    this.toolTipMessage,
+    required this.onChange,
+    required this.onPressed,
+    required this.textController,
+    required this.textFieldValues,
+    required this.isActive,
+    required this.code,
+    required this.index,
+    required this.isPhoneNum,
+    required this.toolTipMessage,
   });
   final void Function(String)? onChange;
-  final Function()? onPressed;
   final List<TextEditingController>? textController;
-  final int? index;
+  final void Function()? onPressed;
   final Map<IconData, String>? textFieldValues;
-  final int? code;
-  final bool? isActive;
+  final bool? isActive, isPhoneNum;
   final String? toolTipMessage;
-  final bool? isPhoneNum;
+  final int? index, code;
+
+  BorderRadius? _borderRadius(int? index) {
+    if (index == 0)
+      return const BorderRadius.only(
+        topLeft: Radius.circular(5.0),
+        topRight: Radius.circular(5.0),
+      );
+    return const BorderRadius.only(
+      bottomLeft: Radius.circular(5.0),
+      bottomRight: Radius.circular(5.0),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +43,10 @@ class CustomTextField extends StatelessWidget {
       style: _theme.textTheme.headline1!.copyWith(
         color: _theme.tabBarTheme.labelColor,
       ),
-      inputFormatters: index == 0
-          ? [
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              LengthLimitingTextInputFormatter(11),
-            ]
-          : [
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              LengthLimitingTextInputFormatter(4),
-            ],
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+        LengthLimitingTextInputFormatter(index == 0 ? 11 : 4),
+      ],
       keyboardType: index == 0 ? TextInputType.numberWithOptions() : null,
       decoration: InputDecoration(
         suffix: Tooltip(
@@ -99,27 +104,11 @@ class CustomTextField extends StatelessWidget {
         fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white, width: 0.0),
-          borderRadius: index == 0
-              ? const BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  topRight: Radius.circular(5.0),
-                )
-              : const BorderRadius.only(
-                  bottomLeft: Radius.circular(5.0),
-                  bottomRight: Radius.circular(5.0),
-                ),
+          borderRadius: _borderRadius(index)!,
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white, width: 0.0),
-          borderRadius: index == 0
-              ? const BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  topRight: Radius.circular(5.0),
-                )
-              : const BorderRadius.only(
-                  bottomLeft: Radius.circular(5.0),
-                  bottomRight: Radius.circular(5.0),
-                ),
+          borderRadius: _borderRadius(index)!,
         ),
       ),
     );

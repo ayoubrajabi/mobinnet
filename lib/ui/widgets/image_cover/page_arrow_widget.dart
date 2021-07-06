@@ -9,12 +9,10 @@ class PageArrow extends StatelessWidget {
     required this.onEnterValue,
     this.index,
   });
-  final void Function(PointerEvent)? onEnter;
-  final void Function(PointerEvent)? onExit;
+  final void Function(PointerEvent)? onEnter, onExit;
   final void Function()? onPressed;
   final bool? onEnterValue;
-  final int? buttonIndex;
-  final int? index;
+  final int? buttonIndex, index;
 
   @override
   Widget build(BuildContext context) {
