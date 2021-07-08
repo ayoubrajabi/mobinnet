@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets.dart';
+import '../../widgets.dart';
 
 class SendSmsButtonInk extends StatelessWidget {
   SendSmsButtonInk({required this.isActive, required this.onEnter});

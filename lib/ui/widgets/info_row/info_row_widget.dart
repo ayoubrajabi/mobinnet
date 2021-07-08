@@ -4,32 +4,18 @@ import '../widgets.dart';
 
 class InfoRowWidget extends StatelessWidget {
   final _infoRowItems = <IconData, List<String>>{
-    Icons.ac_unit: ['مبین نت', 'صفحه اصلی مبین نت'],
+    Icons.home_max_rounded: ['مبین نت', 'صفحه اصلی مبین نت'],
     Icons.shop_2_rounded: ['عوامل مجاز فروش', 'فهرست عوامل مجاز فروش'],
     Icons.map: ['نواحی تحت پوشش', 'مناطق دارای پوشش اینترنت'],
     Icons.price_change: ['طرح ها و تعرفه ها', 'فهرست طرح های اینترنت'],
     Icons.chat_bubble_outline: ['سوالات متداول', 'لیست پرسشهای متداول مبین نت'],
   };
-
-  double? _infoRowheight(
-      bool? isTablet, bool? isMobile, MediaQueryData mediaQuery) {
-    if (isTablet!) {
-      return mediaQuery.size.height * 0.2;
-    } else if (isMobile!) {
-      return mediaQuery.size.height * 0.52;
-    }
-    return mediaQuery.size.height * 0.08;
-  }
-
   @override
   Widget build(BuildContext context) {
     final MediaQueryData? _mediaQuery = MediaQuery.of(context);
-    final bool? _isTablet = Responsive.isTablet(context),
-        _isMobile = Responsive.isMobile(context);
-
     return SizedBox(
       width: _mediaQuery!.size.width,
-      height: _infoRowheight(_isTablet, _isMobile, _mediaQuery)!,
+      height: Responsive.infoRowHeight(context),
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 60.0),
         child: Wrap(

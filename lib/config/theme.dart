@@ -31,22 +31,24 @@ class MobinnetTheme {
       textTheme: TextTheme(
         headline1: TextStyle(
           fontSize: 12.0,
-          color: Color(0xFFA0A8C2),
+          color: const Color(0xFFA0A8C2),
         ),
       ),
       tabBarTheme: TabBarTheme(
         indicatorSize: TabBarIndicatorSize.label,
         labelStyle: const TextStyle(
-          fontSize: 13.0,
-          color: Color(0xFF045453),
-          fontWeight: FontWeight.bold,
+          fontFamily: 'shabnam',
+          fontSize: 12.0,
+          color: const Color(0xFF045453),
+          fontWeight: FontWeight.w300,
         ),
         labelColor: const Color(0xFF045453),
         unselectedLabelColor: const Color(0xFFA0A8C2),
         unselectedLabelStyle: const TextStyle(
-          fontSize: 13.0,
-          color: Color(0xFFA0A8C2),
-          fontWeight: FontWeight.w600,
+          fontFamily: 'shabnam',
+          fontSize: 12.0,
+          color: const Color(0xFFA0A8C2),
+          fontWeight: FontWeight.w300,
         ),
       ),
     );

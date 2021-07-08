@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_tools/persian_tools.dart';
 
-import '../widgets.dart';
+import '../../widgets.dart';
 
 class SignUpWidget extends StatefulWidget {
   @override
@@ -64,7 +64,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(30.0, 30.0, 10.0, 0.0),
       child: Column(
         children: [
           Ink(

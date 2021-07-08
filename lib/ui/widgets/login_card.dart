@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import './widgets.dart';
 
 class LoginCard extends StatelessWidget {
@@ -12,7 +13,7 @@ class LoginCard extends StatelessWidget {
 
     return Container(
       width: _mediaQuery!.size.width,
-      height: _mediaQuery.size.height * 1.2,
+      height: Responsive.cardHeight(context),
       color: _theme!.backgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,

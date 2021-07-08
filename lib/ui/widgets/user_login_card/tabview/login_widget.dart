@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_tools/persian_tools.dart';
-import '../widgets.dart';
+import '../../widgets.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -9,23 +9,53 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  List<TextEditingController>? _textController;
+
+  @override
+  void initState() {
+    _textController = List<TextEditingController>.generate(
+        _textFieldValues.length, (index) => TextEditingController());
+    super.initState();
+  }
+
   final _textFieldValues = <IconData, String>{
-    CupertinoIcons.person_alt_circle: 'شماره موبایل',
-    CupertinoIcons.lock_circle: 'گذرواژه',
+    CupertinoIcons.person: 'شماره موبایل',
+    CupertinoIcons.lock: 'گذرواژه',
   };
 
-  final List<String> _buttonInfo = ['راهنمای ورود', 'فیلم آموزش ورود'];
+  final _buttonInfo = <String>['راهنمای ورود', 'فیلم آموزش ورود'];
 
-  bool? _onEnter = false, _isPhoneNum = false, _checkBoxValue = false;
+  bool? _onEnter = false,
+      _isPhoneNum = false,
+      _checkBoxValue = false,
+      _isActive = false;
   String? _toolTipMessage = 'الزامی';
 
+  void _activeLoginButton(int index) {
+    if (_textController![index].text.isNotEmpty &&
+        _textController!.first.text.isPhoneNumber) {
+      setState(() {
+        _isActive = true;
+      });
+    }
+    if (_textController!.last.text == '') {
+      setState(() {
+        _isActive = false;
+      });
+    }
+  }
+
   void _onChangedTextField(String value, int index) {
-    if (value.isPhoneNumber && index == 0) {
-      setState(() => _isPhoneNum = true);
-    } else if (value.isEmpty && index == 0) {
+    if (_textController!.first.text.isPhoneNumber) {
+      setState(() {
+        _isPhoneNum = true;
+        _toolTipMessage = '';
+      });
+    } else if (_textController!.first.text.isEmpty) {
       setState(() => _toolTipMessage = 'الزامی');
     } else if (index == 0) {
       setState(() {
+        _isActive = false;
         _isPhoneNum = false;
         _toolTipMessage = 'شماره موبایل صحیح نیست';
       });
@@ -36,7 +66,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(60.0, 30.0, 30.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(30.0, 30.0, 10.0, 0.0),
       child: Column(
         children: [
           Container(
@@ -54,11 +84,15 @@ class _LoginWidgetState extends State<LoginWidget> {
               children: List<LoginTextFields>.generate(
                 _textFieldValues.length,
                 (index) => LoginTextFields(
-                  onChanged: (value) => _onChangedTextField(value, index),
+                  onChanged: (value) {
+                    _onChangedTextField(value, index);
+                    _activeLoginButton(index);
+                  },
                   index: index,
                   isPhoneNum: _isPhoneNum,
                   toolTipMessage: _toolTipMessage,
                   textFieldValues: _textFieldValues,
+                  textEditingController: _textController![index],
                 ),
               ),
             ),
@@ -87,6 +121,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             onEnter: (enter) => setState(() => _onEnter = true),
             onExit: (exite) => setState(() => _onEnter = false),
             onEnterValue: _onEnter!,
+            isActive: _isActive,
           ),
           const SizedBox(
             height: 5.0,

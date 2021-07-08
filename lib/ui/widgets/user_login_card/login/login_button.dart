@@ -5,10 +5,11 @@ class LoginButton extends StatelessWidget {
     required this.onEnter,
     required this.onExit,
     required this.onEnterValue,
+    @required this.isActive,
   });
 
   final void Function(PointerEvent)? onEnter, onExit;
-  final bool? onEnterValue;
+  final bool? onEnterValue, isActive;
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +18,26 @@ class LoginButton extends StatelessWidget {
       height: 50.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        boxShadow: onEnterValue!
-            ? const [
-                BoxShadow(
+        boxShadow: isActive! && onEnterValue!
+            ? [
+                const BoxShadow(
                   color: Color(0xFFB2DAA9),
                   blurRadius: 10.0,
                   offset: Offset(0, 5),
                 ),
               ]
-            : const [],
+            : [],
         gradient: LinearGradient(
-          colors: const [
-            Color(0xFF71BF43),
-            Color(0xFF02AD4C),
-          ],
+          colors: isActive!
+              ? const [Color(0xFF71BF43), Color(0xFF02AD4C)]
+              : const [Color(0xFFC7E4BA), Color(0xFFB2DAA9)],
         ),
       ),
       child: MouseRegion(
         onEnter: onEnter!,
         onExit: onExit!,
         child: MaterialButton(
-          onPressed: () {},
+          onPressed: isActive! ? () {} : null,
           child: const Text(
             'ورود',
             style: TextStyle(color: Colors.white),

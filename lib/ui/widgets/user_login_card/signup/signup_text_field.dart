@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../widgets.dart';
+
 class CustomTextField extends StatelessWidget {
   CustomTextField({
     required this.onChange,
@@ -56,57 +58,36 @@ class CustomTextField extends StatelessWidget {
                   isPhoneNum! ? null : Icons.info,
                   color: isPhoneNum! ? null : Colors.amber,
                 )
-              : null,
+              : const Icon(
+                  Icons.home,
+                  color: Colors.transparent,
+                ),
         ),
         hintText: textFieldValues!.values.elementAt(index!),
         hintStyle: _theme.textTheme.headline1,
+        contentPadding: const EdgeInsets.all(20.0),
         prefixIcon: Icon(
           textFieldValues!.keys.elementAt(index!),
           color: _theme.iconTheme.color,
         ),
         suffixIcon: index == 1
-            ? Container(
-                height: 15.0,
-                width: 90.0,
-                margin: const EdgeInsets.symmetric(horizontal: 7.0),
-                decoration: BoxDecoration(
-                  color: _theme.cardColor,
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      isActive == false
-                          ? code.toString()
-                          : textController![index!].text,
-                      style: TextStyle(
-                        color: _theme.tabBarTheme.labelColor,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: onPressed,
-                      highlightColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      icon: Icon(
-                        CupertinoIcons.refresh_circled,
-                        color: _theme.tabBarTheme.labelColor,
-                        size: 18.0,
-                      ),
-                    ),
-                  ],
-                ),
+            ? TextFieldCodeBox(
+                onPressed: onPressed,
+                isActive: isActive,
+                code: code,
+                index: index,
+                textController: textController,
               )
             : const SizedBox(),
         filled: true,
         fillColor: Colors.white,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white, width: 0.0),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: index == 0
+              ? BorderSide(color: Colors.black12, width: 0.0)
+              : BorderSide(color: Colors.white, width: 0.0),
           borderRadius: _borderRadius(index)!,
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: UnderlineInputBorder(
           borderSide: const BorderSide(color: Colors.white, width: 0.0),
           borderRadius: _borderRadius(index)!,
         ),

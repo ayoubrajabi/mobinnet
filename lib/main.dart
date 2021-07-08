@@ -10,7 +10,7 @@ void main() {
 }
 
 class MobinnetApp extends StatelessWidget {
-  MobinnetApp({this.appRoute});
+  MobinnetApp({@required this.appRoute});
 
   final AppRoute? appRoute;
   @override
